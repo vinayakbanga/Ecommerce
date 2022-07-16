@@ -19,6 +19,12 @@ const productSchema=new mongoose.Schema({
         rating:{type:Number,required:true},
         comment:{type:String},
     }],
+
+    user:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true
+    }
     
 
 
