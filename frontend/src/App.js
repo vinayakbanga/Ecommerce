@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import Header from "./Component/Layout/Header/Header"
 import Footer from './Component/Layout/Footer/Footer';
-import {BrowserRouter as Router} from "react-router-dom"
+import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
 import webfront from "webfontloader"
+import Home from "./Component/Home/Home.js"
 
 export default function App() {
  
@@ -16,8 +17,12 @@ export default function App() {
       
     }, )
     return(
+      <>
       <Router>
         <Header />
+        <Routes>
+        <Route exact path='/' element={<Home/>}/>
+        </Routes>
         
         <Footer />
   
@@ -25,6 +30,7 @@ export default function App() {
   
   
       </Router>
+      </>
   
     )
   }

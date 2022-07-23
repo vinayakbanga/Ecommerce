@@ -3,6 +3,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily:{
+      "roboto":[]
+    },
     extend: {},
   },
   plugins: [],
