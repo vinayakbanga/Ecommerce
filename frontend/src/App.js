@@ -4,6 +4,7 @@ import Footer from './Component/Layout/Footer/Footer';
 import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
 import webfront from "webfontloader"
 import Home from "./Component/Home/Home.js"
+import Loader from './Component/Layout/Loading/Loader';
 
 export default function App() {
  
@@ -22,6 +23,8 @@ export default function App() {
         <Header />
         <Routes>
         <Route exact path='/' element={<Home/>}/>
+        {/* <Route exact path='/sad' element={<Loader/>}/> */}
+
         </Routes>
         
         <Footer />
