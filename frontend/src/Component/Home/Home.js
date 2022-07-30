@@ -1,11 +1,13 @@
 import React,{useEffect} from 'react'
 import {BsMouse} from "react-icons/bs"
 import "./Home.css"
-import Product from "./Product.js";
+import Product from "./ProductCard.js";
 import MetaData from '../Layout/MetaData';
-import { getProduct } from '../../actions/productAction';
+import { clearErrors, getProduct } from '../../actions/productAction';
 import {useSelector,useDispatch} from "react-redux"
 import Loader from '../Layout/Loading/Loader';
+import {useAlert} from "react-alert"
+
 
 
 
@@ -18,15 +20,22 @@ import Loader from '../Layout/Loading/Loader';
 // }
 
 const Home = () => {
+
+
+  const alert = useAlert()
   const dispatch =useDispatch();
  const {loading,error,products,productsCount} = useSelector(state=>state.products)
 
 
  useEffect(() => {
+  if(error){
+    alert.error(error)
+    dispatch(clearErrors());
+  }
   
      dispatch(getProduct());
    
- }, [dispatch])
+ }, [dispatch,error,alert])
  
 
 
