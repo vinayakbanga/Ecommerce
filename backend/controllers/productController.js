@@ -46,7 +46,8 @@ let productCount = await Product.countDocuments();
 res.status(200).json({
     success:true,
         products,
-        productCount
+        productCount,
+        resultPerPage
 
 })
 
