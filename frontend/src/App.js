@@ -6,7 +6,8 @@ import webfront from "webfontloader"
 import Home from "./Component/Home/Home.js"
 // import Loader from './Component/Layout/Loading/Loader';
 import ProductDetails from "./Component/Product/ProductDetails1.js"
-
+import Products from "./Component/Product/products.js"
+import Search from "./Component/Product/Search.js"
 export default function App() {
  
   useEffect(() => {
@@ -25,7 +26,9 @@ export default function App() {
         <Routes>
         <Route exact path='/' element={<Home/>}/>
         <Route exact path='/product/:id' element={<ProductDetails/>}/>
-        {/* <Route exact path='/sad' element={<Loader/>}/> */}
+        <Route exact path='/products' element={<Products/>}/>
+        <Route  path='/products/:keyword' element={<Products/>}/>
+        <Route exact path='/search' element={<Search/>}/>
 
         </Routes>
         
