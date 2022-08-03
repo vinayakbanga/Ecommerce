@@ -9,6 +9,8 @@ import Pagination from "react-js-pagination"
 import "./Products.css";
 import Slider from "@mui/material/Slider"
 import { Typography } from '@mui/material'
+import {useAlert} from "react-alert"
+import MetaData from '../Layout/MetaData'
 
 
 
@@ -29,10 +31,12 @@ const Products = () => {
  
     const dispatch = useDispatch();
     const {keyword} = useParams();
+    const alert = useAlert();
 
     const [currentPage,setCurrentPage]= useState(1);
     const [price,setPrice] = useState([0,25000]);
-    const [category,setCategory]= useState("")
+    const [category,setCategory]= useState("");
+    const[ratings,setRatings]=useState(0);
 
 
      
@@ -48,14 +52,18 @@ const Products = () => {
     }
 
       useEffect(() => {
+        if(error){
+          alert.error(error)
+          dispatch(clearErrors())
+        }
         
 
 
-        dispatch(getProduct(keyword,currentPage,price,category))
+        dispatch(getProduct(keyword,currentPage,price,category,ratings))
         
       
         
-      }, [dispatch,keyword,currentPage,price,category])
+      }, [dispatch,keyword,currentPage,price,category,ratings,alert,error])
 
       let count = filteredProductsCount
       
@@ -69,9 +77,10 @@ const Products = () => {
     <>
     {loading?<Loader/>:(
         <>
+        <MetaData title="PRODUCTS--ECOMMERCE"/>
         <div className=''>
         <div className='w-full  flex flex-col-reverse md:flex md:flex-row-reverse md:h-screen  '>
-          <div className='sm:h-screen md:w-3/4 border border-black '>
+          <div className='sm:h-screen md:w-3/4 '>
         <h2 className='productsHeading w-24 border-black border-b-2 p-2 text-lg font-semibold text-center mx-auto'>Products</h2>
         <div className='products flex flex-wrap justify-center items-center my-5 gap-3'>
             {products && products.map((product)=>(
@@ -81,7 +90,7 @@ const Products = () => {
         </div>
         
          
-        <div className="md:w-1/4 border border-red-600 ">
+        <div className="md:w-1/4  ">
          <div className='filterBox w-full px-10' >
          <h2 className='productsHeading w-24 border-black border-b-2 p-2 text-lg font-semibold text-center mx-auto'>Filter</h2>
             <Typography>Price</Typography>
@@ -100,6 +109,19 @@ const Products = () => {
               ))}
 
             </ul>
+            <fieldset className="" >
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
+              value={ratings}
+              onChange={(e,newRating)=>{
+                setRatings(newRating);
+              }}
+              aria-labelledby="continous-slider"
+              min={0}
+              max={5}
+              valueLabelDisplay="auto"
+              />
+            </fieldset>
 
 
             </div>

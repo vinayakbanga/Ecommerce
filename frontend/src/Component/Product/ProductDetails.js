@@ -7,6 +7,7 @@ import { getProductDetails } from '../../actions/productAction'
 import { useParams } from 'react-router-dom'
 import ReactStars from 'react-rating-stars-component'
 import ReviewCard from "./ReviewCard.js"
+import MetaData from '../Layout/MetaData'
 
 
 
@@ -57,6 +58,7 @@ const ProductDetails = () => {
 
 
     </div> */}
+    <MetaData title="PRODUCTDETAILS--ECOMMERCE"/>
      <div className="ProductDetails">
             <div>
               <Carousel>

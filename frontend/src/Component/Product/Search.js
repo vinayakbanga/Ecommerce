@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import MetaData from '../Layout/MetaData';
 // import { useHistory } from "react-router-dom";
 
 
@@ -37,6 +38,7 @@ const Search = (history) => {
 
   return (
     <>
+    <MetaData title="SEARCH--ECOMMERCE"/>
     <form className='searchBox w-full h-screen flex gap-2 justify-center items-center bg-slate-200 fixed  ' onSubmit={searchSubmitHandler}> 
 
     <input className='shadow-lg bg-white border-none p-2 w-1/2 rounded box-border' type="text" placeholder='Search s product...' onChange={(e) => setKeyword(e.target.value)}/>
