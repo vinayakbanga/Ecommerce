@@ -1,12 +1,28 @@
-import React ,{useRef,useState} from 'react'
+import React ,{useRef,useState,useEffect} from 'react'
 import Loader from '../Layout/Loading/Loader'
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOpenIcon from "@mui/icons-material/LockOpen"
 import "./LoginSignUp.css";
 import FaceIcon from "@mui/icons-material/Face"
+import {useDispatch, useSelector} from "react-redux"
+import { clearErrors, login } from '../../actions/userAction';
+import {useAlert} from "react-alert"
+import { useNavigate } from 'react-router-dom';
+
+
 
 const LoginSignUp = () => {
+  
+  const alert = useAlert();
+  
+
+  const dispatch =useDispatch();
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+
+
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -27,8 +43,10 @@ const [avatar,setAvatar] = useState();
 const [avatarPreview,setAvatarPreview] = useState("/Profile.png");
 
 
-const loginSubmit=()=>{
-  console.log("Form submittrd");
+const loginSubmit=(e)=>{
+
+  e.preventDefault();
+  dispatch(login(loginEmail,loginPassword))
 }
 const registerSubmit = (e) => {
   e.preventDefault();
@@ -59,6 +77,18 @@ const registerDataChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 };
+let navigate = useNavigate();
+useEffect(() => {
+  if (error) {
+    alert.error(error);
+    dispatch(clearErrors());
+  }
+
+  if (isAuthenticated) {
+    navigate("/account");
+  }
+}, [dispatch, error, alert, navigate, isAuthenticated]);
+
 
 
 
@@ -87,6 +117,7 @@ const switchTabs = (e,tab)=>{
 
   return (
     <>
+    {loading?<Loader/> :<>
     
     <div className='LoginSignUpContainer w-full h-screen flex justify-center items-center bg-slate-200'>
         <div className='LoginSignUpBox bg-white box-border overflow-hidden md:w-1/2  h-3/4'>
@@ -98,7 +129,7 @@ const switchTabs = (e,tab)=>{
                 </div>
                 <button className='bg-orange-500  h-1 w-1/2 border-none transition-all' ref={switcherTab}></button>
             </div>
-            <form className='loginform  h-3/4 flex flex-col items-center px-2 gap-5 justify-center transition-all' ref={loginTab} onSubmit={loginSubmit} >
+            <form className='loginform  h-3/4 flex flex-col items-center px-2 gap-5 justify-center transition-all' ref={loginTab} onSubmit={loginSubmit} >             
               <div className='loginEmail border border-slate-500 rounded flex gap-2 px-2 py-1 outline-none'>
                 <MailOutlineIcon className=''/>
                 <input
@@ -119,7 +150,7 @@ const switchTabs = (e,tab)=>{
                 placeholder='Password'
                 required
                 value={loginPassword}
-                onChange={(e)=>setLoginEmail(e.target.value)}/>
+                onChange={(e)=>setLoginPassword(e.target.value)}/>
                 
 
               </div>
@@ -186,6 +217,7 @@ const switchTabs = (e,tab)=>{
 
         </div>
     </div>
+    </>}
     </>
   )
 }
