@@ -6,7 +6,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen"
 import "./LoginSignUp.css";
 import FaceIcon from "@mui/icons-material/Face"
 import {useDispatch, useSelector} from "react-redux"
-import { clearErrors, login } from '../../actions/userAction';
+import { clearErrors, login, register } from '../../actions/userAction';
 import {useAlert} from "react-alert"
 import { useNavigate } from 'react-router-dom';
 
@@ -57,8 +57,8 @@ const registerSubmit = (e) => {
   myForm.set("email", email);
   myForm.set("password", password);
   myForm.set("avatar", avatar);
-  // dispatch(register(myForm));
-  console.log("Form rigester submittrd");
+  dispatch(register(myForm));
+  // console.log("Form rigester submittrd");
 };
 
 const registerDataChange = (e) => {
@@ -129,7 +129,7 @@ const switchTabs = (e,tab)=>{
                 </div>
                 <button className='bg-orange-500  h-1 w-1/2 border-none transition-all' ref={switcherTab}></button>
             </div>
-            <form className='loginform  h-3/4 flex flex-col items-center px-2 gap-5 justify-center transition-all' ref={loginTab} onSubmit={loginSubmit} >             
+            <form className='loginform  h-full  flex flex-col items-center  gap-5 justify-center transition-all' ref={loginTab} onSubmit={loginSubmit} >             
               <div className='loginEmail border border-slate-500 rounded flex gap-2 px-2 py-1 outline-none'>
                 <MailOutlineIcon className=''/>
                 <input
@@ -158,7 +158,7 @@ const switchTabs = (e,tab)=>{
               <input type="submit" value="Login" className='loginBtn border  bg-orange-500 text-white px-3 py-1 rounded hover:bg-white hover:text-orange-500 hover:border-orange-500'/>
               
             </form> 
-            <form className='signUpform  h-3/4 flex flex-col items-center px-2 gap-5 justify-center transition-all' ref={registerTab} onSubmit={registerSubmit} encType="multipart/form-data" >
+            <form className='signUpform  h-full flex flex-col items-center px-2 gap-5 justify-center transition-all' ref={registerTab} onSubmit={registerSubmit} encType="multipart/form-data" >
               <div className='signUpName border border-slate-500 rounded flex gap-2 px-2 py-1 outline-none'>
                 <FaceIcon/>
                 <input
@@ -200,7 +200,7 @@ const switchTabs = (e,tab)=>{
               </div>
               
               <div id="registerImage">
-                  <img src={avatarPreview} alt="Avatar Preview" />
+                  <img src={avatarPreview} alt="Avatar Preview" className='w-10' />
                   <input
                     type="file"
                     name="avatar"

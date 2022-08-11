@@ -9,7 +9,18 @@ import ProductDetails from "./Component/Product/ProductDetails1.js"
 import Products from "./Component/Product/products.js"
 import Search from "./Component/Product/Search.js"
 import LoginSignUp from './Component/User/LoginSignUp';
+import store from "./store"
+import { loadUser } from './actions/userAction';
+import UserOptions from "./Component/Layout/Header/UserOption.js"
+import { useSelector } from 'react-redux';
+
+
 export default function App() {
+
+
+
+
+  const {isAuthenticated,user}= useSelector(state=>state.user)
  
   useEffect(() => {
     
@@ -18,12 +29,15 @@ export default function App() {
         families:["Roboto",'Droid Sans', 'Droid Serif']
       }
     })
+
+    store.dispatch(loadUser())
       
-    }, )
-    return(
-      <>
+    },[] )
+    return (
+      
       <Router>
         <Header />
+        {isAuthenticated && <UserOptions user={user}/>}
         <Routes>
         <Route exact path='/' element={<Home/>}/>
         <Route exact path='/product/:id' element={<ProductDetails/>}/>
@@ -40,7 +54,7 @@ export default function App() {
   
   
       </Router>
-      </>
+      
   
     )
   }
