@@ -13,7 +13,8 @@ import store from "./store"
 import { loadUser } from './actions/userAction';
 import UserOptions from "./Component/Layout/Header/UserOption.js"
 import { useSelector } from 'react-redux';
-
+import Profile from "./Component/User/Profile.js"
+import ProtectedRoute from './Component/Route/ProtectedRoute';
 
 export default function App() {
 
@@ -45,12 +46,27 @@ export default function App() {
         <Route  path='/products/:keyword' element={<Products/>}/>
         <Route exact path='/search' element={<Search/>}/>
         <Route exact path='/login' element={<LoginSignUp/>}/>
-
+        <Route exact path='/account'element={<ProtectedRoute Component={<Profile/>}/>}/>
+        {/* <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+                   }
+/> */}
+        {/* <Route exact path="/account" element={<Profile/>}/> */}
+        {/* <Route exact path="/account/*" element={<ProtectedRoute exact path="/account"  element={<Profile/>} />}/> */}
+        {/* <Route exact path="/account" element={<ProtectedRoute><Profile/></ProtectedRoute>}></Route> */}
+        {/* <Route exact path='/account' element={<ProtectedRoute/>}>
+      <Route exact path='/account' element={<Profile/>}/>
+        </Route> */}
+        
         </Routes>
         
         <Footer / >
   
-        {/* <Footer/> */}
+       
   
   
       </Router>
