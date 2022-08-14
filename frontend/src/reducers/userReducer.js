@@ -14,7 +14,12 @@ import { LOGIN_REQUEST,
     UPDATE_PROFILE_REQUEST,
     UPDATE_PROFILE_SUCCESS,
     UPDATE_PROFILE_RESET,
-    UPDATE_PROFILE_FAIL, }
+    UPDATE_PROFILE_FAIL,
+    UPDATE_PASSWORD_FAIL,
+    UPDATE_PASSWORD_REQUEST,
+    UPDATE_PASSWORD_SUCCESS,
+    UPDATE_PASSWORD_RESET,
+     }
      from "../constants/userConstants"
 
 export const userReducer = (state = {user:{}},action)=>{
@@ -52,7 +57,7 @@ export const userReducer = (state = {user:{}},action)=>{
             loading:false,
             isAuthenticated:false,
             user:null,
-            error:"failed"
+            error: action.payload
         };
 
         case LOGOUT_FAIL:
@@ -90,6 +95,7 @@ export const userReducer = (state = {user:{}},action)=>{
 export const profileReducer = (state = {}, action) => {
     switch (action.type) {
       case UPDATE_PROFILE_REQUEST:
+      case UPDATE_PASSWORD_REQUEST:
       
       
       
@@ -98,6 +104,8 @@ export const profileReducer = (state = {}, action) => {
           loading: true,
         };
       case UPDATE_PROFILE_SUCCESS:
+        case UPDATE_PASSWORD_SUCCESS:
+
       
       
         return {
@@ -115,16 +123,19 @@ export const profileReducer = (state = {}, action) => {
     //     };
   
       case UPDATE_PROFILE_FAIL:
+        case UPDATE_PASSWORD_FAIL:
       
       
       
         return {
           ...state,
           loading: false,
-          error: action.payload,
+          error:  action.payload,
+          
         };
   
       case UPDATE_PROFILE_RESET:
+      case UPDATE_PASSWORD_RESET:
       
       
         return {
