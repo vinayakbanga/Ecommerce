@@ -72,7 +72,7 @@ export default function Header({ fixed }) {
               <li className="nav-item">
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
+                  href="/cart"
                 >
                   <span className="ml-2"><BsCart/></span>
                 </a>

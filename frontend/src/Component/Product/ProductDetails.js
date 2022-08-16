@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from "react-material-ui-carousel"
 // import Product from '../Home/Product'
 import "./ProductDetails.css"
@@ -27,37 +27,21 @@ const ProductDetails = () => {
         readOnly: true,
         precision: 0.5,
       };
+
+      const [quantity,setQuantity] = useState(1);
+
+       const increaseQuantity=()=>{
+        const qty = quantity +1;
+        setQuantity(qty)
+       }
+       const decreaseQuantity=()=>{
+        const qty = quantity +1;
+        setQuantity(qty)
+       }
   return (
     <>
     
-    {/* <div className="ProductDetails">
-        <div>
-            <Carousel>
-                {product.images && product.images.map((item,i)=>(
-                    <img className='CarouselImage' key={item.url}
-                    src={item.url}
-                    alt={`${i} Slide`}/>
-                ))}
-
-            </Carousel>
-        </div>
-        <div>
-            <div className='="detailsBlock-1'>
-                <h2>{product.name}</h2>
-                <p>Product #{product._id}</p>
-
-            </div>
-             <div className='detailsBlock-2'>
-                <ReactStars{...options}/>
-                <span>({product.noOfReviews} Reviews)</span>
-             </div>
-             <div className='detailsBlock-3'>
-                <h1>`${product.price}`</h1>
-             </div>
-        </div>
-
-
-    </div> */}
+    
     <MetaData title="PRODUCTDETAILS--ECOMMERCE"/>
      <div className="ProductDetails">
             <div>
@@ -90,9 +74,9 @@ const ProductDetails = () => {
                 <h1>{`₹${product.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
-                    <button >-</button>
-                    <input readOnly type="number" value={1} />
-                    <button >+</button>
+                    <button onClick={decreaseQuantity} >-</button>
+                    <input  type="number" value={quantity} />
+                    <button onClick={increaseQuantity} >+</button>
                   </div>
                   <button
                     

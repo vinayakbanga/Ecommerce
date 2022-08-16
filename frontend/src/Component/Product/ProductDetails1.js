@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import React from "react";
@@ -13,7 +13,7 @@ import ReactStars from 'react-rating-stars-component'
 import ReviewCard from './ReviewCard';
 import Loader from '../Layout/Loading/Loader';
 import { useAlert } from 'react-alert';
-
+import { addItemsToCart } from '../../actions/cartAction';
 
 const ProductDetails = ()=>{
     const dispatch = useDispatch();
@@ -46,15 +46,37 @@ const ProductDetails = ()=>{
         slidesToShow: 1,
         slidesToScroll: 1
       };
+        
+      const [quantity,setQuantity] = useState(1);
 
+       const increaseQuantity=()=>{
+        if(product.stock<=quantity)
+        return;
+        const qty = quantity +1;
+        setQuantity(qty)
+       }
+       const decreaseQuantity=()=>{
+        if(1>=quantity)
+        return;
+        const qty = quantity -1;
+        setQuantity(qty)
+       }
+       
+
+       const addToCartHandler = ()=>{
+        dispatch(addItemsToCart(id,quantity));
+        alert.success("Items added to cart");
+
+       }
+       
       return(
         <>
         {
           loading ? <Loader/> :
           (<>
             <div className="ProductDetails">
-               <div className='w-1/2 border border-black-500'>
-               <Slider {...settings} className='w-1/2 border border-black'>
+               <div className='w-1/2 '>
+               <Slider {...settings} className='w-1/2 '>
          {product.images &&
                      product.images.map((item, i) => (
                        <div>
@@ -111,12 +133,15 @@ const ProductDetails = ()=>{
                    <h1>{`₹${product.price}`}</h1>
                    <div className="detailsBlock-3-1">
                      <div className="detailsBlock-3-1-1">
-                       <button >-</button>
-                       <input readOnly type="number" value={1} />
-                       <button >+</button>
+                     <button onClick={decreaseQuantity} >-</button>
+                    {/* <input type="number" value={} /> */}
+                    <span className=' p-3 '> {quantity}</span>
+                    
+                    <button onClick={increaseQuantity} >+</button>
                      </div>
                      <button
-                       disabled={product.Stock < 1 ? true : false}
+                       disabled={product.stock < 1 ? true : false}
+                       onClick={addToCartHandler}
                        
                      >
                        Add to Cart
@@ -125,8 +150,8 @@ const ProductDetails = ()=>{
    
                    <p>
                      Status:
-                     <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                       {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                     <b className={product.stock < 1 ? "text-red-500" : "text-green-500"}>
+                       {product.stock < 1 ? "OutOfStock" : "InStock"}
                      </b>
                    </p>
                  </div>
