@@ -5,12 +5,14 @@ import {
   } from "../constants/cartConstant";
   
   export const cartReducer = (
-    state = { cartItems: [],  },
+    state = { cartItems: [] },
     action
   ) => {
     switch (action.type) {
       case ADD_TO_CART:
         const item = action.payload;
+        console.log(state);
+
   
         const isItemExist = state.cartItems.find(
           (i) => i.product === item.product
@@ -19,6 +21,7 @@ import {
         if (isItemExist) {
             
           return {
+            
             ...state,
             cartItems: state.cartItems.map((i) =>
               i.product === isItemExist.product ? item : i
