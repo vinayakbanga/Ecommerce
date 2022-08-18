@@ -1,7 +1,7 @@
 import React from 'react'
 import CartItemCard from "./CartItemCard.js"
 import {useDispatch,useSelector } from "react-redux"
-import { addItemsToCart } from '../../actions/cartAction.js';
+import { addItemsToCart,removeItemsFromCart } from '../../actions/cartAction.js';
 
 const Cart = () => {
 
@@ -31,10 +31,23 @@ const Cart = () => {
 //     name:"Vinayak",
 //     quantity:2
 // }
+const deleteCartItems=(id)=>{
+  dispatch(removeItemsFromCart(id));
+
+}
 
 
   return (
     <>
+    {cartItems.length === 0?  <div className="empty-cart py-16 h-screen flex items-center">
+        <div className="container mx-auto text-center">
+            <h1 className="text-3xl font-bold mb-2">Cart Empty 😕</h1>
+            <p className="text-gray-500 text-lg mb-12">You probably haven't ordered  yet. <br/>
+                To , go to the main page.</p>
+            <img className="w-2/5 mx-auto mb-3" src="https://raw.githubusercontent.com/vinayakbanga/Burger-app/main/public/img/empty-cart.png" alt="empty-cart"/>
+            <a href="/" className="border bg-orange-500 text-sm  text-white px-2 py-1  rounded hover:text-orange-500 hover:bg-white hover:border-orange-500 ">Go back</a>
+        </div>
+    </div>: <>
     <div className='CartContainer   h-screen   '>
         {/* <div className='Conatiner border  border-red-900 h-3/4 w-3/4  '> */}
         
@@ -59,7 +72,7 @@ const Cart = () => {
         </thead>
         <tbody>
             {cartItems && cartItems.map((item)=>(
-              <tr className="bg-whiteborder-b text-black  ">
+              <tr className="bg-whiteborder-b text-black  " key={item.product}>
               <th scope="row" className=" font-medium md:px-6 md:font-medium text-black whitespace-nowrap ">
               <CartItemCard item={item}  />
               </th>
@@ -83,18 +96,21 @@ const Cart = () => {
                 }`}</p>
               </td>
               <td className=" ">
-                  <a href="#" className="font-regular text-orange-500  hover:underline">Remove</a>
+                  <p className="font-regular text-orange-500  hover:underline" 
+                  onClick={()=>deleteCartItems(item.product)}>Remove</p>
               </td>
           </tr>
           
             ))}
             <tr className="bg-white border-b text-black  ">
                 <th scope="row" className=" px-6 font-medium text-black whitespace-nowrap ">
-                <p>Gross Total</p>
+                <p className='font-bold text-lg'>Gross Total</p>
                 </th>
                 
                 <td className="px-6">
-                <p>₹600</p>
+                <p className='font-bold text-lg'>{`${cartItems.reduce(
+                  (acc,item) =>acc+item.quantity *item.price ,0
+                )}`}</p>
                 </td>
                 <td className="px-6">
                 <div className="checkOutBtn">
@@ -115,6 +131,8 @@ const Cart = () => {
         {/* </div> */}
 
     </div>
+    </>}
+    
     </>
   )
 }
