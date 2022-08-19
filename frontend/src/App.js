@@ -20,6 +20,8 @@ import UpdatePassword from "./Component/User/UpdatePassword.js"
 import ForgotPassword from "./Component/User/ForgotPassword.js"
 import Cart from "./Component/Cart/Cart.js"
 import Cart1 from "./Component/Cart/Cart1.js"
+import Shipping from "./Component/Cart/Shipping.js"
+import ConfirmOrder from "./Component/Cart/ConfirmOrder.js"
 export default function App() {
 
 
@@ -57,7 +59,8 @@ export default function App() {
         <Route exact path='/password/forgot' element={<ForgotPassword/>}/>
         <Route exact path='/cart' element={<Cart/>}/>
         <Route exact path='/cart1' element={<Cart1/>}/>
-      
+        <Route exact path='/login/shipping'element={<ProtectedRoute Component={<Shipping/>}/>}/>
+        <Route exact path='/order/confirm'element={<ProtectedRoute Component={<ConfirmOrder/>}/>}/>
         
         </Routes>
         

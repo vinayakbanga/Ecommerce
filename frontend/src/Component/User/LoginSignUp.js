@@ -9,10 +9,11 @@ import {useDispatch, useSelector} from "react-redux"
 import { clearErrors, login, register } from '../../actions/userAction';
 import {useAlert} from "react-alert"
 import { useNavigate } from 'react-router-dom';
+// import { Location as location } from 'react-router-dom';
+// import { Location  } from 'react-router-dom';
 
 
-
-const LoginSignUp = () => {
+const LoginSignUp = ({ location }) => {
   
   const alert = useAlert();
   
@@ -78,6 +79,15 @@ const registerDataChange = (e) => {
   }
 };
 let navigate = useNavigate();
+
+// const redirect ="/account"
+
+const redirect = window.location.search ? window.location.search.split("=")[1] : "/account"
+// const redirect = location.search ? location.search.split("=")[1] : "/account"
+// console.log(window.location.search.split("=")[1] );
+console.log(redirect);
+
+
 useEffect(() => {
   if (error) {
     alert.error(error);
@@ -85,9 +95,9 @@ useEffect(() => {
   }
 
   if (isAuthenticated) {
-    navigate("/account");
+    navigate(redirect);
   }
-}, [dispatch, error, alert, navigate, isAuthenticated]);
+}, [dispatch, error, alert, navigate, isAuthenticated,redirect]);
 
 
 

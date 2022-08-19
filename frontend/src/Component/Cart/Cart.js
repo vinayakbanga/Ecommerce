@@ -2,13 +2,13 @@ import React from 'react'
 import CartItemCard from "./CartItemCard.js"
 import {useDispatch,useSelector } from "react-redux"
 import { addItemsToCart,removeItemsFromCart } from '../../actions/cartAction.js';
-
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
 
 
   const dispatch= useDispatch(); 
   const {cartItems}= useSelector((state)=>state.cart);
-
+  const navigate= useNavigate();
   const increaseQuantity =(id,quantity,stock)=>{
     const newQty = quantity +1;
     if(stock <= quantity){
@@ -34,6 +34,11 @@ const Cart = () => {
 const deleteCartItems=(id)=>{
   dispatch(removeItemsFromCart(id));
 
+}
+
+const checkoutHandler=()=>{
+  navigate("/login?redirect=shipping");
+  
 }
 
 
@@ -114,7 +119,8 @@ const deleteCartItems=(id)=>{
                 </td>
                 <td className="px-6">
                 <div className="checkOutBtn">
-                <button className='border bg-orange-500 text-xs md:text-sm px-2 text-white md:px-2 md:py-1 rounded hover:text-orange-500 hover:bg-white hover:border-orange-500' >Check Out</button>
+                <button className='border bg-orange-500 text-xs md:text-sm px-2 text-white md:px-2 md:py-1 rounded hover:text-orange-500 hover:bg-white hover:border-orange-500' 
+                onClick={checkoutHandler}>Check Out</button>
               </div>
                 </td>
                 
