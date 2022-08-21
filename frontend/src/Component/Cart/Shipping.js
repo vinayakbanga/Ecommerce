@@ -24,7 +24,7 @@ const [address,setAddress] = useState(shippingInfo.address)
 const [city, setCity] = useState(shippingInfo.city);
   const [state, setState] = useState(shippingInfo.state);
   const [country, setCountry] = useState(shippingInfo.country);
-  const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
+  const [pincode, setPincode] = useState(shippingInfo.pincode);
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const [city, setCity] = useState(shippingInfo.city);
       return;
     }
     dispatch(
-      saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
+      saveShippingInfo({ address, city, state, country, pincode, phoneNo })
     );
     navigate("/order/confirm");
   };
@@ -88,8 +88,8 @@ const [city, setCity] = useState(shippingInfo.city);
           type="number"
           placeholder="Pin Code"
           required
-          value={pinCode}
-          onChange={(e) => setPinCode(e.target.value)}
+          value={pincode}
+          onChange={(e) => setPincode(e.target.value)}
         />
       </div>
 
