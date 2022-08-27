@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "./Component/Layout/Header/Header"
 import Footer from './Component/Layout/Footer/Footer';
-import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
+import {BrowserRouter as Router,Route, Routes,Switch} from "react-router-dom"
 import webfront from "webfontloader"
 import Home from "./Component/Home/Home.js"
 // import Loader from './Component/Layout/Loading/Loader';
@@ -28,7 +28,8 @@ import Payment from "./Component/Cart/Payment.js"
 import {Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
 import Success from './Component/Cart/Success';
-
+import MyOrders from "./Component/Order/MyOrders.js"
+import OrderDetails from "./Component/Order/OrderDetails.js"
 
 export default function App() {
 
@@ -77,8 +78,14 @@ export default function App() {
         <Route exact path='/cart' element={<Cart/>}/>
         <Route exact path='/cart1' element={<Cart1/>}/>
         <Route exact path='/login/shipping'element={<ProtectedRoute Component={<Shipping/>}/>}/>
-        <Route exact path='/order/confirm'element={<ProtectedRoute Component={<ConfirmOrder/>}/>}/>
         <Route exact path='/success'element={<ProtectedRoute Component={<Success/>}/>}/>
+        <Route exact path='/orders'element={<ProtectedRoute Component={<MyOrders/>}/>}/>
+        {/* <Switch> */}
+        <Route exact path='/order/:id'element={<ProtectedRoute Component={<OrderDetails/>}/>}/>
+        <Route exact path='/order/confirm'element={<ProtectedRoute Component={<ConfirmOrder/>}/>}/>
+        {/* </Switch> */}
+
+
         { stripeApiKey && (
           
         <Route exact path='/process/payment'element={
