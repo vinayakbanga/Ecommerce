@@ -1,43 +1,96 @@
 import { ALL_PRODUCT_FAIL, ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, CLEAR_ERRORS,PRODUCT_DETAILS_FAIL,PRODUCT_DETAILS_REQUEST,PRODUCT_DETAILS_SUCCESS,
-NEW_REVIEW_FAIL,NEW_REVIEW_REQUEST,NEW_REVIEW_SUCCESS,NEW_REVIEW_RESET } from "../constants/productConstants";
+NEW_REVIEW_FAIL,NEW_REVIEW_REQUEST,NEW_REVIEW_SUCCESS,NEW_REVIEW_RESET,
+ADMIN_PRODUCT_FAIL,ADMIN_PRODUCT_SUCCESS,ADMIN_PRODUCT_REQUEST } from "../constants/productConstants";
 
 
-export const productReducer = (state = {products : []},action)=>{
-     
-switch (action.type) {
+
+
+
+export const productReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
     case ALL_PRODUCT_REQUEST:
-        
-        return{
-            loading:true,
-            products:[]
-        }
+    case ADMIN_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        products: [],
+      };
     case ALL_PRODUCT_SUCCESS:
-        
-            return{
-                loading:false,
-                products:action.payload.products,
-                productsCount:action.payload.productsCount,
-                resultPerPage:action.payload.resultPerPage,
-                filteredProductsCount:action.payload.filteredProductsCount
-            }
+      return {
+        loading: false,
+        products: action.payload.products,
+        productsCount: action.payload.productsCount,
+        resultPerPage: action.payload.resultPerPage,
+        filteredProductsCount: action.payload.filteredProductsCount,
+      };
+
+    case ADMIN_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload,
+      };
     case ALL_PRODUCT_FAIL:
-        
-            return{
-                loading:false ,
-                error:action.payload
-            }
+    case ADMIN_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     case CLEAR_ERRORS:
-        
-                return{
-                    ...state ,
-                    error:null
-                }
-
+      return {
+        ...state,
+        error: null,
+      };
     default:
-        return state;
-}
-
+      return state;
+  }
 };
+
+// export const productReducer = (state = {products : []},action)=>{
+     
+// switch (action.type) {
+//     case ALL_PRODUCT_REQUEST:
+//       case ADMIN_PRODUCT_REQUEST:
+        
+//         return{
+//             loading:true,
+//             products:[]
+//         }
+//     case ALL_PRODUCT_SUCCESS:
+        
+//             return{
+//                 loading:false,
+//                 products:action.payload.products,
+//                 productsCount:action.payload.productsCount,
+//                 resultPerPage:action.payload.resultPerPage,
+//                 filteredProductsCount:action.payload.filteredProductsCount
+//             }
+
+//             case ADMIN_PRODUCT_SUCCESS:
+        
+//               return{
+//                   loading:false,
+//                   products:action.payload.products,
+//                    }
+
+//     case ALL_PRODUCT_FAIL:
+//       case ADMIN_PRODUCT_FAIL:
+        
+//             return{
+//                 loading:false ,
+//                 error:action.payload
+//             }
+//     case CLEAR_ERRORS:
+        
+//                 return{
+//                     ...state ,
+//                     error:null
+//                 }
+
+//     default:
+//         return state;
+// }
+
+// };
 
 export const productDetailsReducer = (state = {product : []},action)=>{
      

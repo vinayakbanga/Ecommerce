@@ -6,7 +6,39 @@ const ProtectedRoute = ({Component}) => {
   const { loading, isAuthenticated } = useSelector((state) => state.user);
     
 
-  return (isAuthenticated ? Component : <Navigate to="/login" />);
+  return (
+    <>
+    {
+      loading === false && isAuthenticated === false    ? <Navigate to="/login" /> :Component 
+      // (
+      //   if (isAuthenticated === false) {
+      //     <Redirect to="/login" />
+      //   }
+
+      //   if (isAdmin === true && user.role !== "admin") {
+      //     <Redirect to="/login" />
+      //   }
+
+      //   return <Component  />;
+        
+      // )
+      
+      
+      
+      
+      // isAuthenticated   ? Component : <Navigate to="/login" />
+
+    }
+    </>
+  )
+    // <>
+    // {}
+    
+    // ;
+    
+    // </>
+    
+    
   // return (
   //   <>
   //   if(isAuthenticated === false){
