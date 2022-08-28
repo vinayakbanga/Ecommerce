@@ -31,7 +31,7 @@ if(user.role === "admin"){
   options.unshift({icon:<DashboardIcon/>,name:"Dashboard",func:dashboard},)
 }
 function dashboard(){
-  navigate("/dashboard");
+  navigate("/admin/dashboard");
 }
 function orders(){
   navigate("/orders");

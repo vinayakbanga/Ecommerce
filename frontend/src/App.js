@@ -30,7 +30,7 @@ import {loadStripe} from "@stripe/stripe-js"
 import Success from './Component/Cart/Success';
 import MyOrders from "./Component/Order/MyOrders.js"
 import OrderDetails from "./Component/Order/OrderDetails.js"
-
+import Dashboard from './Component/Admin/Dashboard.js';
 export default function App() {
 
 
@@ -84,7 +84,9 @@ export default function App() {
         <Route exact path='/order/:id'element={<ProtectedRoute Component={<OrderDetails/>}/>}/>
         <Route exact path='/order/confirm'element={<ProtectedRoute Component={<ConfirmOrder/>}/>}/>
         {/* </Switch> */}
-
+        <Route exact path='/admin/dashboard'element={<ProtectedRoute Component={<Dashboard/>}/>}/>
+        {/* <Route exact path='/admin/products'element={<ProtectedRoute Component={<Dashboard/>}/>}/> */}
+        
 
         { stripeApiKey && (
           
