@@ -1,7 +1,6 @@
 import React from 'react'
-// import ReactStars from 'react-rating-stars-component';
+import ReactStars from 'react-rating-stars-component';
 import profilePng from "../../Profile.png"
-import { Rating } from '@mui/material';
 
 const ReviewCard = ({review}) => {
     const options = {
@@ -15,7 +14,7 @@ const ReviewCard = ({review}) => {
     <div className=' border-black w-1/4 flex flex-col items-center shadow-2xl' >
         <img src={profilePng} className="w-20" alt="user"/>
         <p className='font-semibold text-lg'>{review.name}</p>
-        <Rating {...options}/>
+        <ReactStars {...options}/>
         <span className='text-gray-800 font-light'>{review.comment}</span>
     </div>
     </>

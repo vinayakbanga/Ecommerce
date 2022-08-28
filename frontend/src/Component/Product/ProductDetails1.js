@@ -7,33 +7,26 @@ import Slider from "react-slick";
 // import Product from '../Home/Product'
 import "./ProductDetails.css"
 import { useSelector, useDispatch } from 'react-redux'
-import { clearErrors, getProductDetails,newReview } from '../../actions/productAction'
+import { clearErrors, getProductDetails } from '../../actions/productAction'
 import { useParams } from 'react-router-dom'
 import ReactStars from 'react-rating-stars-component'
 import ReviewCard from './ReviewCard';
 import Loader from '../Layout/Loading/Loader';
 import { useAlert } from 'react-alert';
 import { addItemsToCart } from '../../actions/cartAction';
-import { Dialog,DialogActions,DialogContent,DialogTitle,Button } from '@mui/material';
-import Rating from "@mui/material/Rating"
-import { NEW_REVIEW_RESET } from '../../constants/productConstants';
-// NEW_REVIEW_RESET
+
 const ProductDetails = ()=>{
     const dispatch = useDispatch();
     const {id} = useParams();
     const alert = useAlert();
 
     const {product,loading,error}= useSelector((state)=>state.productDetails)
-    const { success, error: reviewError } = useSelector(
-      (state) => state.newReview
-    );
     useEffect(()=>{
        if(error){
        alert.error(error)
        dispatch(clearErrors())
        }
-       
-       
+      
 
 
         dispatch(getProductDetails(id))
@@ -55,10 +48,6 @@ const ProductDetails = ()=>{
       };
         
       const [quantity,setQuantity] = useState(1);
-      const [open, setOpen] = useState(false);
-      const [rating, setRating] = useState(0);
-      const [comment, setComment] = useState("");
-
 
        const increaseQuantity=()=>{
         if(product.stock<=quantity)
@@ -79,42 +68,6 @@ const ProductDetails = ()=>{
         alert.success("Items added to cart");
 
        }
-
-
-       const submitReviewToggle = () => {
-        open ? setOpen(false) : setOpen(true);
-      };
-    
-      const reviewSubmitHandler = () => {
-        const myForm = new FormData();
-    
-        myForm.set("rating", rating);
-        myForm.set("comment", comment);
-        myForm.set("productId", id);
-    
-        dispatch(newReview(myForm));
-    
-        setOpen(false);
-      };
-    
-      useEffect(() => {
-        if (error) {
-          alert.error(error);
-          dispatch(clearErrors());
-        }
-    
-        if (reviewError) {
-          alert.error(reviewError);
-          dispatch(clearErrors());
-        }
-    
-        if (success) {
-          alert.success("Review Submitted Successfully");
-          dispatch({ type: NEW_REVIEW_RESET });
-        }
-        dispatch(getProductDetails(id));
-      }, [dispatch, id,  error, alert,reviewError,success]);
-    
        
       return(
         <>
@@ -170,10 +123,10 @@ const ProductDetails = ()=>{
                    <p>Product # {product._id}</p>
                  </div>
                  <div className="detailsBlock-2">
-                   <Rating {...options} />
+                   <ReactStars {...options} />
                    <span className="detailsBlock-2-span">
                      {" "}
-                     ({product.noOfReviews} Reviews)
+                     ({product.numOfReviews} Reviews)
                    </span>
                  </div>
                  <div className="detailsBlock-3">
@@ -207,7 +160,7 @@ const ProductDetails = ()=>{
                    Description : <p>{product.description}</p>
                  </div>
    
-                 <button onClick={submitReviewToggle}  className="submitReview">
+                 <button  className="submitReview">
                    Submit Review
                  </button>
                </div>
@@ -215,7 +168,17 @@ const ProductDetails = ()=>{
    
              <h3 className="reviewsHeading text-black text-lg text-center border-b-2 border-black w-20 mx-auto p-2">REVIEWS</h3>
    
-               
+              {product.reviews && product.reviews[0] ? (
+               <div className='reviews'>
+                 {product.reviews && product.reviews.map((review)=> <ReviewCard review = {review}/>)}
+   
+               </div>
+             ):
+             (
+               <p className='noReviews text-center text-2xl p-3  text-gray-700 '>No reviews there</p>
+             ) 
+           }
+   {/* 
              <Dialog
                aria-labelledby="simple-dialog-title"
                open={open}
@@ -241,25 +204,11 @@ const ProductDetails = ()=>{
                  <Button onClick={submitReviewToggle} color="secondary">
                    Cancel
                  </Button>
-                 <Button onClick={reviewSubmitHandler}   color="primary">
+                 <Button onClick={reviewSubmitHandler} color="primary">
                    Submit
                  </Button>
                </DialogActions>
-             </Dialog>
-
-               
-
-              {product.reviews && product.reviews[0] ? (
-               <div className='reviews'>
-                 {product.reviews && product.reviews.map((review)=> <ReviewCard review = {review}/>)}
-   
-               </div>
-             ):
-             (
-               <p className='noReviews text-center text-2xl p-3  text-gray-700 '>No reviews there</p>
-             ) 
-           }
-   
+             </Dialog> */}
    
              {/* {product.reviews && product.reviews[0] ? (
                <div className="reviews">

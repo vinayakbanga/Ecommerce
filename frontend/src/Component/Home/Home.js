@@ -69,7 +69,7 @@ const Home = () => {
       <div className='container flex   w-4/5 flex-wrap gap-8 justify-center m-auto ' id='container'>
         
         {products && products.map(product=>(
-          <Product key={product._id} product={product}/>
+          <Product product={product}/>
         ))}
         
   
