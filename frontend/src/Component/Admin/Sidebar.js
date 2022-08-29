@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import PostAddIcon from "@mui/icons-material/PostAdd"
+// import { Link } from 'react-router-dom'
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+// import PostAddIcon from "@mui/icons-material/PostAdd"
 import AddIcon from "@mui/icons-material/Add"
 import ImportExportIcon from "@mui/icons-material/ImportExport"
 import ListAltIcon from "@mui/icons-material/ListAlt"
@@ -21,7 +21,12 @@ const Sidebar = () => {
     </a>
     <a href="/admin/products">
       <p>
-        <ImportExportIcon /> Product
+        <ImportExportIcon /> All Products
+      </p>
+    </a>
+    <a href="/admin/product">
+      <p>
+        <AddIcon /> Create Product
       </p>
     </a>
     {/* <Link>

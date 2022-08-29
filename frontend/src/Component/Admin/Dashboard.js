@@ -1,9 +1,42 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+// getAdminProduct
 import Sidebar from "./Sidebar"
 import {Link} from "react-router-dom"
 import {Doughnut,Line} from "react-chartjs-2"
+import { getAdminProduct } from '../../actions/productAction'
 
 const Dashboard = () => {
+
+
+
+  const dispatch = useDispatch();
+
+  const { products } = useSelector((state) => state.products);
+
+  // const { orders } = useSelector((state) => state.allOrders);
+
+  // const { users } = useSelector((state) => state.allUsers);
+
+  // const { error, products } = useSelector((state) => state.products);
+  
+
+  let outOfStock = 0;
+
+  products &&
+    products.forEach((item) => {
+      if (item.stock === 0) {
+        outOfStock += 1;
+      }
+    });
+
+
+
+    useEffect(() => {
+      dispatch(getAdminProduct());
+      // dispatch(getAllOrders());
+      // dispatch(getAllUsers());
+    }, [dispatch]);
 
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
@@ -23,7 +56,7 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [2,10],
+        data: [outOfStock,products.length - outOfStock],
       },
     ],
   };
@@ -47,7 +80,7 @@ const Dashboard = () => {
           <div className="dashboardSummaryBox2 flex text-center  justify-center gap-5 my-5">
             <Link to="/admin/products" className=' rounded-full p-3 md:p-6 bg-rose-400' >
               <p>Product</p>
-              <p>50</p>
+              <p>{products && products.length}</p>
             </Link>
             <Link to="/admin/orders" className=' rounded-full p-3 md:p-6 bg-yellow-300' >
               <p>Orders</p>

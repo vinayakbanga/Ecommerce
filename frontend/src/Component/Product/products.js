@@ -79,8 +79,8 @@ const Products = () => {
         <>
         <MetaData title="PRODUCTS--ECOMMERCE"/>
         <div className=''>
-        <div className='w-full  flex flex-col-reverse md:flex md:flex-row-reverse md:h-screen  '>
-          <div className='sm:h-screen md:w-3/4 '>
+        <div className='w-full  flex flex-col-reverse md:flex md:flex-row-reverse md:h-max  '>
+          <div className='sm:h-max md:w-3/4 '>
         <h2 className='productsHeading w-24 border-black border-b-2 p-2 text-lg font-semibold text-center mx-auto'>Products</h2>
         <div className='products flex flex-wrap justify-center items-center my-5 gap-3'>
             {products && products.map((product)=>(

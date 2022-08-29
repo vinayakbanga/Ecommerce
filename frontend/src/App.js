@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "./Component/Layout/Header/Header"
 import Footer from './Component/Layout/Footer/Footer';
-import {BrowserRouter as Router,Route, Routes,Switch} from "react-router-dom"
+import {BrowserRouter as Router,Route, Routes} from "react-router-dom"
 import webfront from "webfontloader"
 import Home from "./Component/Home/Home.js"
 // import Loader from './Component/Layout/Loading/Loader';
@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 import Profile from "./Component/User/Profile.js"
 import ProtectedRoute from './Component/Route/ProtectedRoute';
 import UpdateProfile from "./Component/User/UpdateProfile.js"
-import UpdatePassword from "./Component/User/UpdatePassword.js"
+// import UpdatePassword from "./Component/User/UpdatePassword.js"
 import ForgotPassword from "./Component/User/ForgotPassword.js"
 import Cart from "./Component/Cart/Cart.js"
 import Cart1 from "./Component/Cart/Cart1.js"
@@ -32,6 +32,8 @@ import MyOrders from "./Component/Order/MyOrders.js"
 import OrderDetails from "./Component/Order/OrderDetails.js"
 import Dashboard from './Component/Admin/Dashboard.js';
 import ProductList from './Component/Admin/ProductList.js';
+import NewProduct from './Component/Admin/NewProduct.js';
+import UpdateProduct from './Component/Admin/UpdateProduct';
 
 
 export default function App() {
@@ -89,6 +91,8 @@ export default function App() {
         {/* </Switch> */}
         <Route exact path='/admin/dashboard'element={<ProtectedRoute Component={<Dashboard/>}/>}/>
         <Route exact path='/admin/products'element={<ProtectedRoute Component={<ProductList/>}/>}/>
+        <Route exact path='/admin/product'element={<ProtectedRoute Component={<NewProduct/>}/>}/>
+        <Route exact path='/admin/product/:id'element={<ProtectedRoute Component={<UpdateProduct/>}/>}/>
         
 
         { stripeApiKey && (
