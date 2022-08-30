@@ -190,7 +190,7 @@ const NewProduct = () => {
               id="createProductBtn"
               type="submit"
               disabled={loading ? true : false}
-              className="bg-orange-500"
+              style={{border:"",color:"white",backgroundColor:"orangered"}}
               
             >
               Create

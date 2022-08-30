@@ -1,6 +1,6 @@
 import React from 'react'
 // import ReactStars from 'react-rating-stars-component';
-import profilePng from "../../Profile.png"
+import profilePng from "../../images/Profile.png"
 import { Rating } from '@mui/material';
 
 const ReviewCard = ({review}) => {

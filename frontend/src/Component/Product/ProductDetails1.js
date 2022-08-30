@@ -250,7 +250,7 @@ const ProductDetails = ()=>{
                
 
               {product.reviews && product.reviews[0] ? (
-               <div className='reviews'>
+               <div className='reviews flex gap-2'>
                  {product.reviews && product.reviews.map((review)=> <ReviewCard review = {review}/>)}
    
                </div>

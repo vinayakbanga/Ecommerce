@@ -38,6 +38,7 @@ import OrderList from './Component/Admin/OrderList';
 import ProcessOrder from './Component/Admin/ProcessOrder';
 import UsersList from './Component/Admin/UsersList';
 import UpdateUser from './Component/Admin/UpdateUser';
+import ProductReviews from './Component/Admin/ProductReviews';
 
 
 export default function App() {
@@ -101,6 +102,7 @@ export default function App() {
         <Route exact path='/admin/order/:id'element={<ProtectedRoute Component={<ProcessOrder/>}/>}/>
         <Route exact path='/admin/users'element={<ProtectedRoute Component={<UsersList/>}/>}/>
         <Route exact path='/admin/user/:id'element={<ProtectedRoute Component={<UpdateUser/>}/>}/>
+        <Route exact path='/admin/reviews'element={<ProtectedRoute Component={<ProductReviews/>}/>}/>
         
 
         { stripeApiKey && (
