@@ -52,7 +52,7 @@ const OrderList = () => {
       }
   
       dispatch(getAllOrders());
-    }, [dispatch, alert, error, deleteError,  isDeleted]);
+    }, [dispatch, alert, error, deleteError,  isDeleted,navigate]);
   
     const columns = [
       { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
