@@ -100,6 +100,7 @@ export default function App() {
         <Route exact path='/admin/product/:id'element={<ProtectedRoute Component={<UpdateProduct/>}/>}/>
         <Route exact path='/admin/orders'element={<ProtectedRoute Component={<OrderList/>}/>}/>
         <Route exact path='/admin/order/:id'element={<ProtectedRoute Component={<ProcessOrder/>}/>}/>
+        {/* <Route exact path='/admin/order/:id'element={<ProcessOrder/>}/> */}
         <Route exact path='/admin/users'element={<ProtectedRoute Component={<UsersList/>}/>}/>
         <Route exact path='/admin/user/:id'element={<ProtectedRoute Component={<UpdateUser/>}/>}/>
         <Route exact path='/admin/reviews'element={<ProtectedRoute Component={<ProductReviews/>}/>}/>

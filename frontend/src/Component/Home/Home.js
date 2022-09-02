@@ -50,7 +50,7 @@ const Home = () => {
         <p className='' >Welcome to Ecoomerce</p>
   
         <h1 className=''>
-          Find Amaaxing products below
+          Find Amazing products below
         </h1>
         <a href='#container'>
           {/* <button> */}
